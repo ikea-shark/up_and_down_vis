@@ -1,1 +1,16 @@
 This repository works as the master branch for building a visualization platform showing trends of populations for certain monitored species.
+
+---
+Example #1 : Taiwan Breeding Bird Survey Data from GBIF
+
+Condition satisfication for each species to enter population trend analysis:
+* Total accumulated number of recorded sites across Taiwan (regardless of region) > 30 sites
+  * will use region as covariate in rtrim model
+  * certain region is included in covariate only when average number of recorded sites of that region > 5 sites
+* or Total accumulated number of recorded sites in certain region > 20 sites
+  * will not use region as covariate in rtrim model
+  
+Result
+* Plot "overall" (i.e. count value not index) instead of "index"
+  * if standardization is needed than
+* Show slope (multiplicative) value and corresponding p-value
