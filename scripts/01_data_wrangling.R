@@ -10,7 +10,7 @@ library(readxl)
 # import data and extract column needed --------
 ## occurrence table
 dat.occ <- 
-  fread("data/occurrence.txt") %>% 
+  fread("data/raw/occurrence.txt") %>% 
   Filter(function(x)!all(is.na(x)), .) %>%  # remove na column
   .[, list(id = occurrenceID,
            eventID,
@@ -19,7 +19,7 @@ dat.occ <-
 
 ## event table
 dat.evt <- 
-  fread("data/event.txt") %>% 
+  fread("data/raw/event.txt") %>% 
   .[, list(eventID,
            eventDate,
            eventTime = substr(eventTime, 1, 5),
@@ -33,7 +33,7 @@ dat.evt <-
 
 ## measurment or fact  
 dat.mof <- 
-  fread("data/measurementorfact.txt") %>% 
+  fread("data/raw/measurementorfact.txt") %>% 
   # add index of each row
   .[, Row := .I] %>% 
   .[measurementType %in% c("時段", "距離", "天氣代號", "風速代號")] %>%
@@ -101,7 +101,7 @@ dat.aggr <-
 
 # bind region of site ----
 site.region <- 
-  read_xlsx("data/02_樣區表_v2.7.xlsx", sheet = 2) %>% 
+  read_xlsx("data/clean/02_樣區表_v2.7.xlsx", sheet = 2) %>% 
   setDT %>% 
   .[, list(Site = `樣區編號`, HJHsiu3, ELEV, X_wgs84, Y_wgs84)] %>% 
   .[ELEV %in% 2:3, region := "Mountain"] %>% 
@@ -137,4 +137,4 @@ dat.analysis <-
 
 
 # write data as RData
-saveRDS(dat.analysis, "data/dat_pre.rds")
+saveRDS(dat.analysis, "data/clean/dat_pre.rds")

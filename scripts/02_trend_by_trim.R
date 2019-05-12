@@ -8,7 +8,7 @@ library(rgdal)
 
 # import data ----
 dat.analysis <- 
-  readRDS("data/dat_pre.rds")
+  readRDS("data/clean/dat_pre.rds")
 
 # split data by species ----
 # species region list
@@ -27,7 +27,7 @@ dat.TW <-
 
 # shapefile of Taiwan (for trend map)
 TW.poly <- 
-  readOGR("data/mapdata201805310314/COUNTY_MOI_1070516.shp") %>% 
+  readOGR("data/clean/mapdata201805310314/COUNTY_MOI_1070516.shp") %>% 
   fortify()
 
 # construct model by trim ----
