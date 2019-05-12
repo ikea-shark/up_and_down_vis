@@ -9,4 +9,4 @@ This repository works as the master branch for building a visualization platform
 
 - [Bokeh](https://bokeh.pydata.org/en/latest/)
 
-![](https://i.imgur.com/soExtEE.png)
+![](https://i.imgur.com/O6SLFU9.png)
