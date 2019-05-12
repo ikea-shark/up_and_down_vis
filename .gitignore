@@ -41,4 +41,7 @@ Temporary Items
 # Ignore all local history of files
 .history
 
+### Trend Analysis Part
+data
+
 # End of https://www.gitignore.io/api/macos,visualstudiocode
