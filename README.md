@@ -2,6 +2,43 @@ This repository works as the master branch for building a visualization platform
 
 The purpose of this project is to provide datasets opened via GBIF a data visualization tool.
 
+### Project Structure
+
+```bash
+.
+├── LICENSE
+├── README.md
+├── app
+│   └── README.md
+├── docs
+│   ├── architecture.drawio
+│   ├── architecture.png
+│   └── minutes_meetup.md
+└── model
+    ├── GBIF_BBS.Rproj
+    ├── README.md
+    ├── data
+    │   └── clean
+    │       ├── 02_樣區表_v2.7.xlsx
+    │       ├── dat_pre.rds
+    │       ├── mapdata201805310314
+    │       │   ├── COUNTY_MOI_1070516.dbf
+    │       │   ├── COUNTY_MOI_1070516.prj
+    │       │   ├── COUNTY_MOI_1070516.shp
+    │       │   ├── COUNTY_MOI_1070516.shx
+    │       │   └── Metadata.xml
+    │       └── weight.xlsx
+    ├── results
+    │   ├── Error_msg_TW.txt
+    │   ├── Error_msg_region.txt
+    │   ├── trim_plot_TW
+    │   └── trim_plot_region
+    └── scripts
+        ├── 01_data_wrangling.R
+        └── 02_trend_by_trim.R
+```
+
+
 ### Population trends with Bokeh App
 
 - [Bokeh](https://bokeh.pydata.org/en/latest/)
