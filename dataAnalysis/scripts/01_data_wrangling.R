@@ -94,8 +94,11 @@ dat.analysis <-
   filter.region[dat.region, on = c("vernacularName", "region")] %>% 
   .[TW_site >= 30 & N_region > 1, analysis := "TW trend"] %>% 
   .[is.na(analysis) & region_site >= 20, analysis := paste0(region, " trend")] %>% 
-  .[!is.na(analysis)]
+  .[!is.na(analysis), 
+    list(region, vernacularName, Site, X_wgs84, Y_wgs84, 
+         Year, Weight, Count, analysis)]
 
 
 # write data as RData
 saveRDS(dat.analysis, "data/clean/dat_pre.rds")
+
