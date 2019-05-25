@@ -24,3 +24,11 @@ Result
 * Plot "overall" (i.e. count value not index) instead of "index"
   * if standardization is needed than
 * Show slope (multiplicative) value and corresponding p-value
+
+Visualization Platform Draft
+* Divided by tabs
+* Tabs include
+  * EDA (Exploratory Data Analysis) - Table View 
+  * EDA - Figure View (4 figures, e.g. histogram, scatterplot, ...etc)
+  * Trend - 4 to 6 figures including Taiwan and different regions (North, East, West, Mountain, Sea Islands)
+  * Map - Spatial map displaying sampling sites and each sites' trend
