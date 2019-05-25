@@ -1,1 +1,1 @@
-This folder is for deployment
+This folder is for data analysis
