@@ -6,47 +6,8 @@ library(tidyr)
 library(stringr)
 library(readxl)
 
-
-# import data and extract column needed --------
-## occurrence table
-dat.occ <- 
-  fread("data/raw/occurrence.txt") %>% 
-  Filter(function(x)!all(is.na(x)), .) %>%  # remove na column
-  .[, list(id = occurrenceID,
-           eventID,
-           Count = individualCount,
-           vernacularName)]
-
-## event table
-dat.evt <- 
-  fread("data/raw/event.txt") %>% 
-  .[, list(eventID,
-           eventDate,
-           eventTime = substr(eventTime, 1, 5),
-           locationID,
-           Latitude = decimalLatitude,
-           Longitude = decimalLongitude)] %>% 
-  separate(eventDate, c("Year", "Month", "Date"), "-") %>% 
-  .[eventTime == "NA:NA", eventTime := NA] %>% 
-  separate(eventTime, c("hour", "minute"), ":") %>% 
-  .[, hour := as.numeric(hour)]
-
-## measurment or fact  
-dat.mof <- 
-  fread("data/raw/measurementorfact.txt") %>% 
-  # add index of each row
-  .[, Row := .I] %>% 
-  .[measurementType %in% c("時段", "距離", "天氣代號", "風速代號")] %>%
-  # if there are two value of one measurementType in one event, 
-  # keep the first value
-  .[.[, .I[which.min(Row)], by = list(id, measurementType)]$V1] %>% 
-  dcast(id ~ measurementType, value.var = "measurementValue")
-
-# combind three table --------
 dat <- 
-  dat.evt[dat.occ, on = "eventID"] %>%  # with dat.evt
-  dat.mof[, list(id, `時段`, `距離`)][., on = "id"] %>% # bind interval, distance
-  dat.mof[, list(eventID = id, `天氣代號`, `風速代號`)][., on = "eventID"] %>% # bind weather, wind
+  fread("data/clean/exp_data.csv") %>% 
   # select event fit survey method
   .[`時段` %in% c("0-6minutes", "0-3minutes", "3-6minutes")] %>% 
   .[`距離` %in% c("0-50m", "25-50m", "0-25m", "25-100m")] %>% 
@@ -101,7 +62,7 @@ dat.aggr <-
 
 # bind region of site ----
 site.region <- 
-  read_xlsx("data/clean/02_樣區表_v2.7.xlsx", sheet = 2) %>% 
+  read_xlsx("data/raw/02_樣區表_v2.7.xlsx", sheet = 2) %>% 
   setDT %>% 
   .[, list(Site = `樣區編號`, HJHsiu3, ELEV, X_wgs84, Y_wgs84)] %>% 
   .[ELEV %in% 2:3, region := "Mountain"] %>% 
@@ -133,8 +94,11 @@ dat.analysis <-
   filter.region[dat.region, on = c("vernacularName", "region")] %>% 
   .[TW_site >= 30 & N_region > 1, analysis := "TW trend"] %>% 
   .[is.na(analysis) & region_site >= 20, analysis := paste0(region, " trend")] %>% 
-  .[!is.na(analysis)]
+  .[!is.na(analysis), 
+    list(region, vernacularName, Site, X_wgs84, Y_wgs84, 
+         Year, Weight, Count, analysis)]
 
 
 # write data as RData
 saveRDS(dat.analysis, "data/clean/dat_pre.rds")
+
