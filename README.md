@@ -25,10 +25,7 @@ Result
   * if standardization is needed than
 * Show slope (multiplicative) value and corresponding p-value
 
-Visualization Platform Draft
-* Divided by tabs
-* Tabs include
-  * EDA (Exploratory Data Analysis) - Table View 
-  * EDA - Figure View (4 figures, e.g. histogram, scatterplot, ...etc)
-  * Trend - 4 to 6 figures including Taiwan and different regions (North, East, West, Mountain, Sea Islands)
-  * Map - Spatial map displaying sampling sites and each sites' trend
+### Potential collaboration tool
+* Live Share via Visual Studio Code
+  * copy link from Live-share button on the down-left corner
+  * send to invited persons
