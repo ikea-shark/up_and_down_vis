@@ -1,5 +1,0 @@
-run:
-  worker:
-    command:
-      - pip install -r ./bokeh_app/requirements.txt
-      - bokeh serve --show bokeh_app
