@@ -14,5 +14,3 @@ RUN pip install --upgrade pip \
     && rm -rf ~/.cache/pip
 
 ENV ORIGIN="127.0.0.1:5006" PORT="5006" PREFIX="" LOG_LEVEL="info"
-
-CMD bokeh serve --show bokeh_app
