@@ -41,7 +41,7 @@ Temporary Items
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
-
+.Rhistory
 ### Trend Analysis Part
 **/data/raw/
 
