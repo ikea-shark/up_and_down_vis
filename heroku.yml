@@ -1,9 +1,4 @@
 build:
   docker:
-    web: /bokeh_app/Dockerfile
-run:
-  worker:
-    image: web
-
-
+    web: ./bokeh_app/Dockerfile
 
