@@ -1,0 +1,13 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx:/etc/nginx/conf.d/
+    ports:
+      - "5006:80"
+    depends_on:
+      -bokeh
+  bokeh:
+    build: ./bokeh_app
+    command: bokeh serve --show bokeh_app --allow-websocket-origin="*"
