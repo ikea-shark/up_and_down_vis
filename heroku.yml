@@ -1,8 +1,9 @@
-web:
-  build: ./bokeh_app
-  command: 'bokeh serve --show bokeh_app'
-  working_dir: /home
-  environment:
-    PORT: 5006
-  ports:
-    - '5006:5006'
+build:
+  docker:
+    web: /bokeh_app/Dockerfile
+run:
+  worker:
+    image: web
+
+
+
