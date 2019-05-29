@@ -1,1 +1,1 @@
-web: docker-compose up -d
+web: bokeh serve --show bokeh_app  --allow-websocket-origin="*"
